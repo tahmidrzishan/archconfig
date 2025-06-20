@@ -1,20 +1,18 @@
 ### Variables
 set $mod Mod4
 set $term alacritty
-set $menu wofi --show drun
+set $menu rofi -show drun  # changed from wofi to rofi (Wayland → X11)
 
 ### Appearance
-output * bg #000000 solid_color
+# output * bg #000000 solid_color   <-- Sway-only. Removed.
 font pango:monospace 11
+exec --no-startup-id feh --bg-fill /path/to/your/wallpaper.jpg  # background workaround
 
-### Input
-input * {
-    xkb_layout us
-    repeat_delay 300
-    repeat_rate 50
-}
+### Input (converted for X11)
+exec --no-startup-id setxkbmap us  # keyboard layout
+# Touchpad settings must be configured via xorg.conf.d manually (not in i3 config)
 
-### Bar (swaybar)
+### Bar (i3bar)
 bar {
     position top
     status_command i3status
@@ -58,7 +56,6 @@ bindsym $mod+Shift+Left  move left
 bindsym $mod+Shift+Down  move down
 bindsym $mod+Shift+Up    move up
 bindsym $mod+Shift+Right move right
-
 
 # Move windows
 bindsym $mod+Shift+h move left
@@ -112,24 +109,17 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-###Audio Control
+### Audio Control
 bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+
 bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-
 bindsym XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
 
-###Brightness control with BrighnessCtl
+### Brightness control with BrightnessCtl
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
 
-# Set keyboard shortcuts for screen brightness control
-bindsym XF86MonBrightnessDown exec brightnessctl set 5%- # Decrease brightness by 5%
-bindsym XF86MonBrightnessUp exec brightnessctl set 5%+ # Increase brightness by 5%
-
-## Touchpad settings
-input "type:touchpad" {
-	#enable tap to click
-	tap enabled 
-      # Other options like dwt enabled
-}
-
-
-
-
+## Touchpad settings (commented out, not supported in i3 config)
+# input "type:touchpad" {
+#  tap enabled
+# }
+# Instead, create /etc/X11/xorg.conf.d/40-libinput.conf for touchpad config. It's done automatically when you use the intall_i3.sh file to install the config.
