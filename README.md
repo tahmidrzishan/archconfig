@@ -37,12 +37,6 @@ chmod +x install.sh
 The script will guide you through the setup. You can install what you need, and don't have to install what you don't.
 
 ---
-## 🛠 Customization
-
-Feel free to modify the `sway_config` and `i3_config` files as needed. After making changes, run the `update.sh` script to save them back to this repo.
-
----
-
 ## 📌 License
 
 You are free to use and modify these config files. A credit would be appreciated if you find it helpful!
