@@ -36,7 +36,7 @@ fi
 
 ##install i3 or sway
 
-echo "What window manager do you want to install?"
+echo "If you're using an older system, like before 2020, i3 (X11) might be a better choice for you. Other than that, Sway (Wayland) is good for you. Which window manager do you want to install?"
 echo "[1] i3, [2] Sway, [0] None"
 read -p "Which one to install? (Default: [0]) : " prompt
 if [[ "$prompt" == "1" ]]; then
@@ -50,6 +50,17 @@ elif [[ "$prompt" == "2" ]]; then
 else
 	echo "Didn't install any window manager."
 fi
+
+
+read -p "Prefer dark mode for GTK apps? y/N: " prompt
+if [[ "$prompt" == "y" || "$prompt" == "Y" ]]; then
+	sudo pacman -S gnome-themes-extra --needed
+	mkdir -p ~/.config/gtk-3.0/
+	mkdir -p ~/.config/gtk-4.0/
+	sudo cp ./src/gtksettings ~/.config/gtk-3.0/settings.ini
+	sudo cp ./src/gtksettings ~/.config/gtk-4.0/settings.ini
+fi
+
 
 echo "Installation complete. Quitting..."
 
