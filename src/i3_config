@@ -6,16 +6,23 @@ set $menu rofi -show drun  # changed from wofi to rofi (Wayland → X11)
 ### Appearance
 # output * bg #000000 solid_color   <-- Sway-only. Removed.
 font pango:monospace 11
-exec --no-startup-id feh --bg-fill /path/to/your/wallpaper.jpg  # background workaround
+exec --no-startup-id feh --bg-fill ~/Downloads/archtv.png  # background workaround
 
 ### Input (converted for X11)
 exec --no-startup-id setxkbmap us  # keyboard layout
 # Touchpad settings must be configured via xorg.conf.d manually (not in i3 config)
 
+### Start ibus daemon
+exec_always --no-startup-id ibus-daemon -d -r -x
+
+### OTD Daemon for graphics tabs
+exec_always --no-startup-id otd-daemon
+
 ### Bar (i3bar)
 bar {
     position top
     status_command i3status
+    tray_output primary
     colors {
         # Text color of status bar
         statusline #ffffff
@@ -27,6 +34,10 @@ bar {
 
 
 ### Keybindings
+
+# System 
+bindsym $mod+Shift+o exec shutdown -h now
+bindsym $mod+Shift+i exec reboot
 
 # Terminal and launcher
 bindsym $mod+Return exec $term
@@ -118,8 +129,4 @@ bindsym XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
 
-## Touchpad settings (commented out, not supported in i3 config)
-# input "type:touchpad" {
-#  tap enabled
-# }
-# Instead, create /etc/X11/xorg.conf.d/40-libinput.conf for touchpad config. It's done automatically when you use the intall_i3.sh file to install the config.
+bindsym $mod+Shift+p exec flameshot gui -p ~/screenshot

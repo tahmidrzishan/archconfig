@@ -10,7 +10,12 @@ if [[ "$prompt" == "y" || "$prompt" == "Y" ]]; then
 fi
 
 echo "Installing necessary tools..."
-sudo pacman -S --needed base-devel git brightnessctl alacritty fastfetch
+sudo pacman -S --needed base-devel git brightnessctl alacritty fastfetch ttf-jetbrains-mono-nerd
+
+echo "Setting JetBrains Mono Nerd Font as default for alacritty.(Terminal Emulator)"
+mkdir -p "~/.config/alacritty/"
+echo "Installed JetBrains Mono Nerd font as default for alacitty (Terminal Emulator)"
+cp "./src/alacitty.toml" "~/.config/alacritty/alacritty.toml"
 
 echo "An AUR helper will help you install packages from Arch User Repository(AUR) that are not available through pacman."
 read -p "Install yay as AUR helper? y/N: " prompt

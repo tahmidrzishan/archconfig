@@ -5,7 +5,7 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 
-pacman -S --needed i3 i3status dmenu feh rofi xorg-xinit xorg-server
+pacman -S --needed i3 i3status dmenu feh rofi xorg-xinit xorg-server flameshot
 mkdir -p ~/.config/i3/
 cp i3_config ~/.config/i3/config
 echo "Installed i3 config file in ~/.config/i3/config"

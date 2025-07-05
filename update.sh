@@ -9,6 +9,9 @@ if [[ "$prompt" == "y" || "$prompt" == "Y" ]]; then
     cp ~/.config/sway/config ./src/sway_config
     echo "Updating i3 config file"
     cp ~/.config/i3/config ./src/i3_config
+    echo "Updating alacritty config file"
+    cp "~/.config/alacritty/alacritty.toml" "./src/alacitty.toml"
+
 else
     echo "Not executing..."
 fi

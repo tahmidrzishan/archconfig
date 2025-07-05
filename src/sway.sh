@@ -1,4 +1,4 @@
-sudo pacman -S --needed i3status alacritty wofi
+sudo pacman -S --needed sway i3status alacritty wofi
 
 mkdir -p ~/.config/sway/
 cp sway_config ~/.config/sway/config
